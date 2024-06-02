@@ -14,7 +14,7 @@ const App = () => {
         <BmiDisplay />
         <BmiCalculator />
       </div>
-    </UserProvider>
+    </UserProvider> // wraps th child components to provide context
   );
 };
 
