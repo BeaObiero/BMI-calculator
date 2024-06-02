@@ -8,26 +8,21 @@ export const UserProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/api/user');
-        const contentType = response.headers.get('content-type');
+    fetch('/API/user.json')
+      .then(response => {
         if (!response.ok) {
-          throw new Error('Failed to fetch');
+          throw new Error('Network response was not ok');
         }
-        if (!contentType || !contentType.includes('application/json')) {
-          throw new Error('Response is not JSON');
-        }
-        const data = await response.json();
+        return response.json();
+      })
+      .then(data => {
         setUser(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
         setLoading(false);
-      }
-    };
-
-    fetchData();
+      })
+      .catch(error => {
+        setError(error.message);
+        setLoading(false);
+      });
   }, []);
 
   return (

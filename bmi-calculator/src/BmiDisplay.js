@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { UserContext } from './UserContext';
+import { UserContext } from './UserContext'; // Adjust the import path as needed
 
 const BmiDisplay = () => {
   const context = useContext(UserContext);
