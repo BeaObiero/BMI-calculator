@@ -12,6 +12,7 @@ const AgeDisplay = () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+  if (!user) return <div>No user data available</div>;
 
   return <div>Age: {user.age}</div>;
 };

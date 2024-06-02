@@ -11,8 +11,12 @@ export const UserProvider = ({ children }) => {
     const fetchData = async () => {
       try {
         const response = await fetch('/api/user');
+        const contentType = response.headers.get('content-type');
         if (!response.ok) {
           throw new Error('Failed to fetch');
+        }
+        if (!contentType || !contentType.includes('application/json')) {
+          throw new Error('Response is not JSON');
         }
         const data = await response.json();
         setUser(data);

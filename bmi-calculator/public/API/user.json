@@ -1,6 +1,6 @@
 {
     "name": "John Doe",
     "age": 30,
-    "height(m)": 1.75, 
-    "weight(Kg)": 70    
+    "height": 1.75, 
+    "weight": 70    
   }
