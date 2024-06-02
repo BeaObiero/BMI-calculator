@@ -3,6 +3,7 @@ import { UserProvider } from './UserContext';
 import NameDisplay from './NameDisplay';
 import AgeDisplay from './AgeDisplay';
 import BmiDisplay from './BmiDisplay';
+import BmiCalculator from './BmiCalculator';
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
         <NameDisplay />
         <AgeDisplay />
         <BmiDisplay />
+        <BmiCalculator />
       </div>
     </UserProvider>
   );
