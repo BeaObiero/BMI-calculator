@@ -1,14 +1,19 @@
 import React, { useContext } from 'react';
-import { UserContext } from '../UserContext';
+import { UserContext } from './UserContext';
 
 const AgeDisplay = () => {
-  const user = useContext(UserContext);
+  const context = useContext(UserContext);
 
-  return (
-    <div>
-      {user ? <p>Age: {user.age}</p> : <p>Loading...</p>}
-    </div>
-  );
+  if (!context) {
+    return <div>Loading...</div>;
+  }
+
+  const { user, loading, error } = context;
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  return <div>Age: {user.age}</div>;
 };
 
 export default AgeDisplay;

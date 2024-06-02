@@ -1,25 +1,28 @@
 import React, { useContext } from 'react';
-import { UserContext } from '../UserContext';
+import { UserContext } from './UserContext';
 
 const BmiDisplay = () => {
-  const user = useContext(UserContext);
+  const context = useContext(UserContext);
+
+  if (!context) {
+    return <div>Loading...</div>;
+  }
+
+  const { user, loading, error } = context;
 
   const calculateBMI = (height, weight) => {
-    if (height > 0) {
-      return (weight / (height * height)).toFixed(2);
-    }
-    return 0;
+    // BMI = weight (kg) / (height (m) * height (m))
+    const heightInMeters = height / 100;
+    return (weight / (heightInMeters * heightInMeters)).toFixed(2);
   };
 
-  return (
-    <div>
-      {user ? (
-        <p>BMI: {calculateBMI(user.height, user.weight)}</p>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
-  );
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!user) return <div>No user data available</div>;
+
+  const bmi = calculateBMI(user.height, user.weight);
+
+  return <div>BMI: {bmi}</div>;
 };
 
 export default BmiDisplay;
